@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("MoodifyAPI")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ea0b971f7f305c37251598e5535e9c2eaccd0464")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+24e8bc40601f5e7f3ed6af25c06c0f1e383070ab")]
 [assembly: System.Reflection.AssemblyProductAttribute("MoodifyAPI")]
 [assembly: System.Reflection.AssemblyTitleAttribute("MoodifyAPI")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

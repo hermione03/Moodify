@@ -1,13 +1,18 @@
+using Microsoft.EntityFrameworkCore;
+using MoodifyAPI.Data;
+
 var builder = WebApplication.CreateBuilder(args);
 
-// Ajouter les services nécessaires
-builder.Services.AddControllers(); // Active les contrôleurs comme MoodController
+builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+// Ajout de la base SQLite
+builder.Services.AddDbContext<MoodifyDbContext>(options =>
+    options.UseSqlite("Data Source=moodify.db")); // assure-toi d’avoir Microsoft.EntityFrameworkCore.Sqlite
+
 var app = builder.Build();
 
-// Swagger uniquement en dev
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
@@ -15,9 +20,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
-// Middleware pour les routes d'API
 app.UseAuthorization();
-app.MapControllers(); // Active les routes des contrôleurs
+app.MapControllers();
 
 app.Run();
