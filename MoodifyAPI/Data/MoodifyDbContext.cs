@@ -5,7 +5,10 @@ namespace MoodifyAPI.Data
 {
     public class MoodifyDbContext : DbContext
     {
-        public MoodifyDbContext(DbContextOptions<MoodifyDbContext> options) : base(options) {}
+        public MoodifyDbContext(DbContextOptions<MoodifyDbContext> options)
+            : base(options)
+        {
+        }
 
         public DbSet<Mood> Moods { get; set; }
         public DbSet<Music> Musics { get; set; }

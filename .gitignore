@@ -1,1 +1,44 @@
 /bin/
+# Build folders
+bin/
+obj/
+out/
+
+# User-specific files
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Visual Studio Code
+.vscode/
+
+# Rider
+.idea/
+
+# ASP.NET Scaffolding
+ScaffoldingReadMe.txt
+
+# Logs
+*.log
+
+# Entity Framework generated files
+*MigrationsSnapshot.cs
+
+# Mac/Linux system files
+.DS_Store
+*.swp
+
+# Dotnet tools
+*.db
+*.pdb
+
+# npm/node related
+node_modules/
+
+# dotenv
+.env
+
+# Others
+*.nupkg
+*.vs/

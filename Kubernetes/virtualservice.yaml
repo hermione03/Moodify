@@ -1,0 +1,18 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: moodifyapi-virtualservice
+spec:
+  hosts:
+  - "moodifyapi.local"  # Important pour correspondre à ce que tu testeras dans le navigateur
+  gateways:
+  - moodifyapi-gateway
+  http:
+  - match:
+    - uri:
+        prefix: /
+    route:
+    - destination:
+        host: moodifyapi-service   # Ici ton vrai service Kubernetes
+        port:
+          number: 80
