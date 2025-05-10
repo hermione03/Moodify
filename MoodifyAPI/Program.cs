@@ -1,74 +1,80 @@
-// using Microsoft.EntityFrameworkCore;
-// using MoodifyAPI.Data;
+using Microsoft.EntityFrameworkCore;
+using MoodifyAPI.Data;
+using MoodifyAPI.Services;
 
 // var builder = WebApplication.CreateBuilder(args);
 
+// // Services
 // builder.Services.AddControllers();
 // builder.Services.AddEndpointsApiExplorer();
 // builder.Services.AddSwaggerGen();
 
-// // Ajout de la base SQLite
 // builder.Services.AddDbContext<MoodifyDbContext>(options =>
-//     options.UseSqlite("Data Source=moodify.db")); // assure-toi d’avoir Microsoft.EntityFrameworkCore.Sqlite
+//     options.UseMySql(
+//         builder.Configuration.GetConnectionString("DefaultConnection"),
+//         ServerVersion.AutoDetect(builder.Configuration.GetConnectionString("DefaultConnection"))));
+
+// builder.Services.AddScoped<IMoodService, MoodService>();
+// builder.Services.AddAutoMapper(typeof(Program).Assembly);
 
 // var app = builder.Build();
 
-// if (app.Environment.IsDevelopment())
+// // Use port 80 in production for compatibility with Kubernetes Ingress
+// if (app.Environment.IsProduction())
+// {
+//     app.Urls.Add("http://0.0.0.0:80");
+// }
+
+// // Swagger only in dev
+// // if (app.Environment.IsDevelopment())
+// // {
+// //     app.UseSwagger();
+// //     app.UseSwaggerUI();
+// // }
+// if (!app.Environment.IsProduction())  // <- plus sûr
 // {
 //     app.UseSwagger();
 //     app.UseSwaggerUI();
 // }
 
-// app.UseHttpsRedirection();
+
+
+// // app.UseHttpsRedirection();
+
 // app.UseAuthorization();
+
 // app.MapControllers();
+
+// // Optional: redirect "/" to Swagger
+// app.MapGet("/", context =>
+// {
+//     context.Response.Redirect("/swagger/index.html");
+//     return Task.CompletedTask;
+// });
 
 // app.Run();
 
-using Microsoft.EntityFrameworkCore;
-using MoodifyAPI.Data;
-using MoodifyAPI.Services;
-// using MySql.EntityFrameworkCore.Extensions;
-
-
 var builder = WebApplication.CreateBuilder(args);
-
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-// Ajouter les services nécessaires
-
-builder.Services.AddDbContext<MoodifyDbContext>(options =>
-    options.UseMySql(
-        builder.Configuration.GetConnectionString("DefaultConnection"),
-        ServerVersion.AutoDetect(builder.Configuration.GetConnectionString("DefaultConnection"))));
-
-
-
-
-
-builder.Services.AddScoped<IMoodService, MoodService>();
-builder.Services.AddAutoMapper(typeof(Program).Assembly);
-
 var app = builder.Build();
-
-if (app.Environment.IsProduction())
-{
-    app.Urls.Add("http://0.0.0.0:5109");
-}
-
 
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
-    app.UseSwaggerUI();
+    // Ne PAS appeler UseSwaggerUI ici
 }
 
-app.UseHttpsRedirection();
+app.Urls.Add("http://0.0.0.0:80");
+
+
+
 app.UseAuthorization();
 app.MapControllers();
 
+app.MapGet("/", () => "Moodify API is alive");
 
 app.Run();
 

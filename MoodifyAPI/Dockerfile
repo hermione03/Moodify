@@ -16,7 +16,7 @@ WORKDIR /app
 COPY --from=build /app/out ./
 
 # Expose le port utilisé par l'application
-EXPOSE 5109
+EXPOSE 80
 
 # Lancer l'application
 ENV ASPNETCORE_ENVIRONMENT=Development

@@ -1,0 +1,19 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: moodifyapi-ingress
+  namespace: default
+  annotations: {}
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: moodifyapi.local
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: moodifyapi-service
+                port:
+                  number: 80
