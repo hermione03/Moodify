@@ -48,3 +48,8 @@ node_modules/
 *.DS_Store
 ._.DS_Store
 *._.DS_Store
+
+# Fichiers à ignorer
+MoodifyAPI/bin/
+MoodifyAPI/obj/
+*.d
